@@ -10,8 +10,8 @@ stuff_download="
   /system/app/MicroGGSFProxy/MicroGGSFProxy.apk                     repo    microg/com.google.android.gsf
   /system/framework/com.google.android.maps.zip                     github  microg/android_frameworks_mapsv1                .zip
   /system/priv-app/AuroraServices/AuroraServices.apk                gitlab  AuroraOSS/AuroraServices                        .apk
-  /system/priv-app/FakeStore/FakeStore.apk                          repo    microg/com.android.vending
-  /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk                  repo    microg/com.google.android.gms
+  /system/priv-app/FakeStore/FakeStore.apk                                                      direct    https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/com.android.vending-84022614.apk
+  /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk                                              direct    https://github.com/microg/GmsCore/releases/download/v0.3.7.250932/com.google.android.gms-250932014.apk
 
   /system/app/GoogleCalendarSyncAdapter/-19-21-22-23-24-25-26-27-/GoogleCalendarSyncAdapter.apk direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.calendar/21/nodpi/2016267990.apk
   /system/app/GoogleCalendarSyncAdapter/-28-29-30-/GoogleCalendarSyncAdapter.apk                direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.calendar/21/nodpi/2016267990.apk
