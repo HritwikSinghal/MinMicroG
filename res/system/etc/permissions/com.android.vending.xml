@@ -38,5 +38,6 @@
         <permission name="android.permission.USE_INSTALLER_V2" />
         <permission name="com.android.permission.USE_INSTALLER_V2" />
         <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
     </privapp-permissions>
 </permissions>
