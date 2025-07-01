@@ -97,11 +97,13 @@ for repo in $(echo "$stuff_repo" | select_word 1); do
   line="$(echo "$stuff_repo" | grep -E "^[ ]*$repo[ ]+" | head -n1)";
   repourl="$(echo "$line" | select_word 2)";
   [ "$repourl" ] || { echo "ERROR: Repo $repo has no URL"; continue; }
-  echo " -- REPO: Downloading repo $repo";
-  echo " ---- Downloading $repourl";
+  echo -e "\n\t\t---- REPO: Downloading repo $repo ----";
+  echo -e "\t\t -------- Downloading $repourl --------";
   curl -fL "$repourl/index-v1.jar" -o "$tmpdir/repos/$repo.jar" || { echo "ERROR: Repo $repo failed to download"; continue; }
+  echo ""
   unzip -oq "$tmpdir/repos/$repo.jar" "index-v1.json" -d "$tmpdir/repos/" || { echo "ERROR: Repo $repo failed to unzip"; continue; }
   mv -f "$tmpdir/repos/index-v1.json" "$tmpdir/repos/$repo.json" || { echo "ERROR: Repo $repo failed to rename"; continue; }
+  echo -e "\t\t-----------------------------------------\n"
 done;
 
 # Download assets
@@ -115,7 +117,7 @@ for object in $(echo "$stuff_download" | select_word 1); do
   objectpath="$(echo "$line" | select_word 3)";
   objectarg="$(echo "$line" | select_word 4)";
   [ "$objectpath" ] || { echo "ERROR: $object has no source arguments"; continue; }
-  echo " -- ASSET: Downloading object $object from source $source";
+  echo -e "\n\t\t-- ASSET: Downloading object $object from source $source --";
   case "$source" in
     local)
       objectfile="$objectpath";
@@ -163,7 +165,7 @@ for object in $(echo "$stuff_download" | select_word 1); do
       objectname="$(basename "$objecturl")";
       objectfile="$tmpdir/$objectname";
       echo " ---- Downloading $objecturl";
-      curl -fL -H 'User-Agent: Mozilla' "$objecturl" -o "$objectfile" || { echo "ERROR: $object failed to download"; continue; }
+      curl --retry 3 --retry-delay 10 -fLsS -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0' "$objecturl" -o "$objectfile" || { echo "ERROR: $object failed to download"; exit; }
       objectcksum="$(cksum "$objectfile" | select_word 1)";
       echo "FILE: $object, URL: $objecturl, CKSUM: $objectcksum;" >> "$updatelog";
     ;;
